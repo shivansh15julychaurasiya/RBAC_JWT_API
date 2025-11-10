@@ -1,0 +1,35 @@
+{
+  "info": {
+    "name": "RBAC JWT API",
+    "_postman_id": "rbac-jwt-collection-1",
+    "description": "Basic collection for RBAC JWT API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"Admin@123\"\n}"
+        },
+        "url": { "raw": "http://localhost:8080/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api","auth","login"] }
+      },
+      "response": []
+    },
+    {
+      "name": "GET /api/admin/login-logs (protected)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type":"text" }
+        ],
+        "url": { "raw": "http://localhost:8080/api/admin/login-logs", "protocol": "http", "host": ["localhost"], "port":"8080", "path":["api","admin","login-logs"] }
+      }
+    }
+  ]
+}

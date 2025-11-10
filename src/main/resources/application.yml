@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rbac_db
+    username: postgres
+    password: vijay
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+app:
+  jwt:
+    secret: replace-with-32+chars-minimum-change-me
+    expiration-ms: 3600000 # 1 hour
+server:
+  port: 8081
+logging:
+  level:
+    root: INFO
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
