@@ -1,18 +1,21 @@
 package com.example.rbac.service;
 
-import com.example.rbac.dto.UserResponseDTO;
-import com.example.rbac.model.Role;
-import com.example.rbac.model.User;
-import com.example.rbac.repository.RoleRepository;
-import com.example.rbac.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.example.rbac.dto.UserResponseDTO;
+import com.example.rbac.exception.ResourceNotFound;
+import com.example.rbac.model.Role;
+import com.example.rbac.model.User;
+import com.example.rbac.repository.RoleRepository;
+import com.example.rbac.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +38,7 @@ public class UserService {
 
         Set<Role> roles = roleNames.stream()
                 .map(roleName -> roleRepository.findByName(roleName)
-                        .orElseThrow(() -> new RuntimeException("Role not found: " + roleName)))
+                        .orElseThrow(() -> new ResourceNotFound("Role not found: " + roleName)))
                 .collect(Collectors.toSet());
 
         user.setRoles(roles);
@@ -52,14 +55,17 @@ public class UserService {
     }
 
     // Fetch by ID
-    public Optional<UserResponseDTO> getUserById(Long id) {
-        return userRepository.findById(id).map(this::toDTO);
+    public UserResponseDTO getUserById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFound("User", "id", id));
+        return toDTO(user);
     }
+
 
     // Update user roles or status
     public UserResponseDTO updateUser(Long id, Set<String> newRoles, Boolean enabled) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFound("User", "id", id));
 
         if (newRoles != null && !newRoles.isEmpty()) {
             Set<Role> roles = newRoles.stream()
@@ -79,10 +85,9 @@ public class UserService {
 
     // Delete user
     public void deleteUser(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new RuntimeException("User not found");
-        }
-        userRepository.deleteById(id);
+    	if (!userRepository.existsById(id)) {
+    	    throw new ResourceNotFound("User", "id", id);
+    	}
     }
 
     // Helper: convert entity to DTO
