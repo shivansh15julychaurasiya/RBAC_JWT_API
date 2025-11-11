@@ -1,0 +1,232 @@
+
+/* LOGIN PAGE CSS */
+
+/* Full-screen background with overlay */
+.login-page {
+  background: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1920&q=80')
+    no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6); /* dark transparent overlay */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centered login card */
+.login-card {
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.login-card input {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.login-card button {
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-card button:hover {
+  background-color: #0d6efd;
+  transform: translateY(-2px);
+}
+
+/* Not found page css */
+
+/* Background Container */
+.notfound-bg {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Floating Animated Circles */
+.animated-bg::before,
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: float 12s infinite ease-in-out;
+}
+
+.animated-bg::before {
+  width: 300px;
+  height: 300px;
+  background: rgba(13, 110, 253, 0.2);
+  top: -50px;
+  left: -100px;
+}
+
+.animated-bg::after {
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 193, 7, 0.2);
+  bottom: -80px;
+  right: -120px;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(20px); }
+}
+
+/* Card Styling */
+.notfound-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  width: 400px;
+  backdrop-filter: blur(8px);
+}
+
+.login-bg {
+  background-image: url('../../assets/images/login-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.card-custom {
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+}
+
+
+/* Title & Text */
+.notfound-title {
+  font-size: 100px;
+  font-weight: 800;
+  color: #0d6efd;
+  margin-bottom: 10px;
+}
+
+.notfound-subtitle {
+  font-size: 26px;
+  font-weight: 600;
+  color: #333;
+}
+
+.notfound-text {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+button {
+  border-radius: 25px !important;
+  padding: 10px 25px !important;
+}
+
+/* Dashboarc Css */
+.dashboard-container {
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.dashboard-content {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.dash-card {
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.dash-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.chart-placeholder {
+  height: 300px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Sidebar css */
+ .sidebar {
+  width: 230px;
+  background: linear-gradient(180deg, #0d6efd 0%, #003c8f 100%);
+  color: white;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  z-index: 200;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+/* Mobile overlay behavior */
+@media (max-width: 991px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -230px;
+    height: 100%;
+    z-index: 1000;
+    transition: all 0.4s ease;
+  }
+
+  .sidebar.mobile-open {
+    left: 0;
+  }
+}
+
+/* Backdrop for mobile overlay */
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* topbar css */
+.topbar {
+  background-color: white;
+  border-bottom: 1px solid #dee2e6;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 1100; /* stays above sidebar */
+}
+
+.toggle-btn {
+  border-radius: 50%;
+  padding: 6px 8px;
+}
